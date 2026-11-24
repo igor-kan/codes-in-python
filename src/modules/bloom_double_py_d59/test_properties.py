@@ -1,0 +1,15 @@
+import unittest
+from core import *
+from concurrency import parallel_fold_batches
+
+class TestProperties(unittest.TestCase):
+    def test_properties(self) -> None:
+        chks = parallel_fold_batches([[1, 2], [3, 4]])
+        self.assertEqual(len(chks), 2)
+        bf = IntBitBloom(512, 5)
+        for x in range(1, 30):
+            bf.add(x * 19)
+            self.assertTrue(bf.might_contain(x * 19))
+
+if __name__ == "__main__":
+    unittest.main()
